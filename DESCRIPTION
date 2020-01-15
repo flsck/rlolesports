@@ -6,6 +6,6 @@ Author: Florian Sckade
 Maintainer: Florian Sckade <florian.sckade@gmail.com>
 Description: Wraps the unofficial Riot Games League of Legends Esports API. 
     Allows for easy querying of the data made available by the Publisher Riot Games, utilizing R API tools and providing an easy interface.
-License: What license is it under?
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
