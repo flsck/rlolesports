@@ -12,3 +12,8 @@ LazyData: true
 RoxygenNote: 6.1.1
 Suggests: 
     testthat
+URL: https://github.com/FlorianSck/rlolesports
+BugReports: https://github.com/FlorianSck/rlolesports/issues
+Imports: 
+    jsonlite,
+    httr
