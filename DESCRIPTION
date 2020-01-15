@@ -1,11 +1,11 @@
 Package: rlolesports
 Type: Package
-Title: What the Package Does (Title Case)
-Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Title: An R Interface for the League of Leagend ESports API
+Version: 0.0.0.9000
+Author: Florian Sckade
+Maintainer: Florian Sckade <florian.sckade@gmail.com>
+Description: Wraps the unofficial Riot Games League of Legends Esports API. 
+    Allows for easy querying of the data made available by the Publisher Riot Games, utilizing R API tools and providing an easy interface.
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
