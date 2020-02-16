@@ -1,11 +1,22 @@
-#' Provides the public Esports API key
+#' Set an Environment Variable for the public Esports API key
 #'
-#' for internal use only
-#'
-#' @return the x-api-key needed for querying
-get_key <- function() {
-  api_key <- "0TvQnueqKa5mxJntVWt0w4LpLfEkrV1Ta8rQBb9Z"
-  return(api_key)
+#' `set_apikey` creates an environmental variable for the League of Legend Esports API Key,
+#' to be used by other functions calling the API and requiring authentification.
+#' @export
+set_apikey <- function() {
+  Sys.setenv(LOLESPORTS_KEY = "0TvQnueqKa5mxJntVWt0w4LpLfEkrV1Ta8rQBb9Z")
 }
 
+#' Check if the Environment Variable for the Esports API is set
+#'
+#' `check_apikey` informs the user whether the LoL Esports API Key is available as an environmental variable.
+#' @export
+check_apikey  <- function() {
+  key <- Sys.getenv("LOLESPORTS_KEY")
+  if(identical(key, "")) {
+    stop("Please set the env var LOLESPORTS_KEY via 'set_key()' function",
+         call. = FALSE)
+  }
 
+  print("League ESports API Key is loaded")
+}
