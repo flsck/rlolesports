@@ -4,8 +4,19 @@
 #' to be used by other functions calling the API and requiring authentification.
 #' @export
 set_apikey <- function() {
-  Sys.setenv(LOLESPORTS_KEY = "0TvQnueqKa5mxJntVWt0w4LpLfEkrV1Ta8rQBb9Z")
-}
+  tryCatch(
+    {
+      message("Setting LOL Esports API Key ...")
+      Sys.setenv(LOLESPORTS_KEY = "0TvQnueqKa5mxJntVWt0w4LpLfEkrV1Ta8rQBb9Z")
+      message("Done")
+    },
+    error = function(cond) {
+      message(paste("Setting Environment Variable caused an error"))
+      message("Error message:")
+      message(cond)
+    }
+  )
+  }
 
 #' Check if the Environment Variable for the Esports API is set
 #'
