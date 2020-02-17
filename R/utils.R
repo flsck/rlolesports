@@ -25,9 +25,22 @@ set_apikey <- function() {
 check_apikey  <- function() {
   key <- Sys.getenv("LOLESPORTS_KEY")
   if(identical(key, "")) {
-    stop("Please set the env var LOLESPORTS_KEY via 'set_key()' function",
+    stop("Env var is not set. Please set the env var LOLESPORTS_KEY via 'set_key()' function",
          call. = FALSE)
   }
 
   print("League ESports API Key is loaded")
 }
+
+#' get the api key for processing by other functions
+get_apikey <- function() {
+  key <- Sys.getenv("LOLESPORTS_KEY")
+  if(identical(key, "")) {
+    stop("Env var is not set. Please set the env var LOLESPORTS_KEY via 'set_key()' function",
+         call. = FALSE)
+  }
+  return(key)
+}
+
+
+
