@@ -42,5 +42,21 @@ get_apikey <- function() {
   return(key)
 }
 
+#' Return the base league API URL
+#'
+league_url <- function() {
+  url <- "https://esports-api.lolesports.com/persisted/gw/"
+  return(url)
+}
+
+#' check locale
+#'
+valid_locales <- function(){
+  valid_codes <- c("en-US", "en-GB", "en-AU", "cs-CZ", "de-DE", "el-GR", "es-ES",
+                   "es-MX", "fr-FR", "hu-HU", "it-IT", "pl-PL", "pt-BR", "ro-RO",
+                   "ru-RU", "tr-TR", "ja-JP", "ko-KR")
+
+  return(valid_codes)
+}
 
 
