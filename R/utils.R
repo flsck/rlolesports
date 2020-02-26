@@ -60,3 +60,32 @@ valid_locales <- function(){
 }
 
 
+#' query function
+#'
+#'TODO Finish generic query function
+query_api <- function(url, key, ...) {
+  # GET request
+  response <- httr::GET(
+    url = url,
+    query = list(...),
+    httr::add_headers("x-api-key" = key)
+  )
+  #
+  status_cd <- httr::status_code(resp)
+  # parse request
+  parsed <- jsonlite::fromJSON(
+    httr::content(resp, "text", encoding = "UTF-8"),
+    simplifyDataFrame = TRUE
+  )
+
+  return_obj <- list(
+    response = response,
+    status_cd = status_cd,
+    parsed = parsed
+  )
+
+  return(return_obj)
+}
+
+
+
