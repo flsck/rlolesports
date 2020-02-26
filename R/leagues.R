@@ -114,6 +114,12 @@ getTournamentsForLeague <- function(leagueId,
 }
 
 
+
+
+tournamentId <- "103462439438682788"
+
+
+
 # Print Methods etc -----
 
 print.leagueRequest <- function(x, ...) {
