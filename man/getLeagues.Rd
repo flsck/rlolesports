@@ -7,15 +7,18 @@
 getLeagues(save_details = FALSE, hl = "en-US")
 }
 \arguments{
-\item{save_details}{logical. Should a detailed list, including the API response be returned, or just a data.frame?}
+\item{save_details}{logical. Should a detailed list, including the API
+response be returned, or just a data.frame?}
 
 \item{hl}{string. Locale or language code using ISO 639-1 and ISO 3166-1 alpha-2.}
 }
 \value{
-A list containing a data.frame witht the information about the leagues, the used language code and the response to the original GET request
+A list containing a data.frame witht the information about the leagues,
+        the used language code and the response to the original GET request
         contained in the function.
 }
 \description{
 The function is used to get detailed information about specific leagues.
-The data.frame contained in the returned list gives information about a a leagues region, id, icon and more.
+The data.frame contained in the returned list gives information about
+a leagues region, id, icon and more.
 }

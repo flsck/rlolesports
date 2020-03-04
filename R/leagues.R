@@ -4,12 +4,15 @@
 #' Get information about a league, the standings and its various tournaments.
 #'
 #' The function is used to get detailed information about specific leagues.
-#' The data.frame contained in the returned list gives information about a a leagues region, id, icon and more.
+#' The data.frame contained in the returned list gives information about
+#' a leagues region, id, icon and more.
 #'
-#' @param save_details logical. Should a detailed list, including the API response be returned, or just a data.frame?
+#' @param save_details logical. Should a detailed list, including the API
+#'                     response be returned, or just a data.frame?
 #' @param hl string. Locale or language code using ISO 639-1 and ISO 3166-1 alpha-2.
 #'
-#' @return A list containing a data.frame witht the information about the leagues, the used language code and the response to the original GET request
+#' @return A list containing a data.frame witht the information about the leagues,
+#'         the used language code and the response to the original GET request
 #'         contained in the function.
 #' @export
 getLeagues <- function(save_details = FALSE,
@@ -62,7 +65,6 @@ getLeagues <- function(save_details = FALSE,
 #'
 #' @return list.
 #' @export
-#'
 getTournamentsForLeague <- function(leagueId,
                                     save_details = FALSE,
                                     hl = "en-US") {
@@ -70,27 +72,18 @@ getTournamentsForLeague <- function(leagueId,
   key <- get_apikey()
   url <- paste0(league_url(), "getTournamentsForLeague")
 
-  # GET request
-  resp <- httr::GET(
+  query_result <- query_api(
     url = url,
-    query = list(
-      leagueId = leagueId,
-      hl = hl),
-    httr::add_headers("x-api-key" = key)
-  )
-  #
-  status_cd <- httr::status_code(resp)
-  # parse request
-  parsed <- jsonlite::fromJSON(
-    httr::content(resp, "text", encoding = "UTF-8"),
-    simplifyDataFrame = TRUE
+    key = key,
+    leagueId = leagueId,
+    hl = hl
   )
 
-  if(is.null(parsed$data$leagues$tournaments))
+  if(is.null(query_result$parsed$data$leagues$tournaments))
   {
     message("No Tournament found.")
   } else {
-    table <- as.data.frame(do.call(rbind, parsed$data$leagues$tournaments))
+    table <- as.data.frame(do.call(rbind, query_result$parsed$data$leagues$tournaments))
   }
 
   return_obj <- structure(
@@ -98,15 +91,15 @@ getTournamentsForLeague <- function(leagueId,
       content = table,
       hl = hl,
       leagueId = leagueId,
-      response = resp
+      response = query_result$response
     ),
     class = "tournamentsRequest"
   )
 
-  if (!save_details & status_cd == 200) {
+  if (!save_details & query_result$status_code == 200) {
     return(table)
-  } else if(save_details & status_cd != 200) {
-    message(paste0("Status code ", status_cd, " returned."))
+  } else if(save_details & query_result$status_code != 200) {
+    message(paste0("Status code ", query_result$status_code, " returned."))
     return(return_obj)
   } else {
     return(return_obj)
@@ -114,9 +107,6 @@ getTournamentsForLeague <- function(leagueId,
 }
 
 
-
-
-tournamentId <- "103462439438682788"
 
 
 

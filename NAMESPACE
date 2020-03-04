@@ -2,5 +2,6 @@
 
 export(check_apikey)
 export(getLeagues)
+export(getStandings)
 export(getTournamentsForLeague)
 export(set_apikey)

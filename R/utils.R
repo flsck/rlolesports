@@ -50,7 +50,6 @@ league_url <- function() {
 }
 
 #' check locale
-#'
 valid_locales <- function(){
   valid_codes <- c("en-US", "en-GB", "en-AU", "cs-CZ", "de-DE", "el-GR", "es-ES",
                    "es-MX", "fr-FR", "hu-HU", "it-IT", "pl-PL", "pt-BR", "ro-RO",
@@ -60,9 +59,14 @@ valid_locales <- function(){
 }
 
 
-#' query function
+#' Query function
 #'
-#'TODO Finish generic query function
+#' Builds a GET Query for the LOL Esports API and returns
+#' a list with response, status code and parsed data
+#'
+#' @param url the url that needs to be queries
+#' @param key api key
+#' @param ... Possible query parameters
 query_api <- function(url, key, ...) {
   # GET request
   response <- httr::GET(
@@ -70,17 +74,17 @@ query_api <- function(url, key, ...) {
     query = list(...),
     httr::add_headers("x-api-key" = key)
   )
-  #
-  status_cd <- httr::status_code(resp)
+  # check status code
+  status_code <- httr::status_code(response)
   # parse request
   parsed <- jsonlite::fromJSON(
-    httr::content(resp, "text", encoding = "UTF-8"),
+    httr::content(response, "text", encoding = "UTF-8"),
     simplifyDataFrame = TRUE
   )
 
   return_obj <- list(
     response = response,
-    status_cd = status_cd,
+    status_code = status_code,
     parsed = parsed
   )
 
