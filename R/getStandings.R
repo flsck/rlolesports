@@ -88,8 +88,6 @@ process_matches <- function(parsed) {
 
 }
 
-
-
 #' create match dataframe object
 #'
 #' Unpacks the list of teams in a match list into a single row data frame
@@ -114,7 +112,41 @@ create_match_df <- function(list_of_matches) {
   return(result)
 }
 
+#' Process Standings Data
+#'
+#' Parses the Data about current standings in the respective league into an
+#' easy to handle `data.frame`.
+#'
+#' @param parsed list. The parsed data from the standings GET request.
+process_standings <- function(parsed) {
+  stages <- parsed$data$standings$stages[[1]]
 
+  round_data <- list()
+  for(i in 1:nrow(stages)) {
+    if(length((stages[[4]][[i]])[[3]][[1]]) == 0) { next }
+    list_of_standings <- ((stages[[4]][[i]])[[3]][[1]])
+    list_of_ranks <- list_of_standings[[2]]
+    names(list_of_ranks) <- list_of_standings$ordinal
+
+    l_o_r <- lapply(list_of_ranks,
+                    function(x) {
+                      y <- x[, 1:5]
+                      y[, 6] <- x[, 6][1]
+                      y[, 7] <- x[, 6][2]
+                      y
+                    }
+    )
+    # TODO
+    # this needs to include the ordinal rank of the respective teams.
+    # Maybe with an additional lapply?
+    l_o_r2 <- do.call(
+      rbind,
+      l_o_r
+    )
+
+  }
+
+}
 
 
 
