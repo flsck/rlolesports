@@ -27,12 +27,12 @@ getStandings <- function(tournamentId,
   )
 
   match_list <-  process_matches(query_result$parsed)
-  # TODO Parse Standings, create a function for that
+  standings <- process_standings(query_result$parsed)
 
   return_obj <- structure(
     list(
       match_list = match_list,
-      # Append Standings once implemented
+      standings = standings,
       hl = hl,
       tournamentId = tournamentId,
       response = query_result$response
@@ -41,7 +41,10 @@ getStandings <- function(tournamentId,
   )
 
   if (!save_details & query_result$status_code == 200) {
-    return(table)
+    return(
+      list(match_list = match_list,
+           standings = standings)
+    )
   } else if(save_details & query_result$status_code != 200) {
     message(paste0("Status code ", query_result$status_code, " returned."))
     return(return_obj)
@@ -128,8 +131,8 @@ process_standings <- function(parsed) {
     list_of_ranks <- list_of_standings[[2]]
     names(list_of_ranks) <- list_of_standings$ordinal
 
-    l_o_r <- lapply(list_of_ranks,
-                    function(x) {
+    lor <- lapply(list_of_ranks,
+                    function(x, n, i) {
                       y <- x[, 1:5]
                       y[, 6] <- x[, 6][1]
                       y[, 7] <- x[, 6][2]
@@ -139,13 +142,17 @@ process_standings <- function(parsed) {
     # TODO
     # this needs to include the ordinal rank of the respective teams.
     # Maybe with an additional lapply?
-    l_o_r2 <- do.call(
+    lor_df <- do.call(
       rbind,
-      l_o_r
+      lor
     )
+    lor_df$rank <- as.integer(sub("\\.\\d", "", row.names(lor_df)))
 
+    round_data[[i]] <- lor_df
+    names(round_data)[i] <- stages$name[i]
   }
 
+  return(round_data)
 }
 
 

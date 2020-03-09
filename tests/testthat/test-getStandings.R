@@ -15,11 +15,17 @@ query_result <- query_api(
   hl = hl
 )
 match_list_lcs <- process_matches(query_result$parsed)
+rankings_lcs <- process_standings(query_result$parsed)
 
 test_that(
   "NA LCS 2020 has a Regular Season and Playoffs",
   expect_equal(names(match_list_lcs), c("Regular Season", "Playoffs"))
 )
+test_that(
+  "NA LCS 2020 has 10 Teams",
+  expect_equal(dim(rankings_lcs$`Regular Season`)[1], 10)
+)
+
 
 ## LEC -----------
 query_result <- query_api(
@@ -44,14 +50,21 @@ test_that(
 )
 
 test_that(
-  "EU and NA have the same structure in Regular Season",
+  "EU and NA have the same structure in Playoffs",
   expect_equal(
     names(match_list_lcs$Playoffs),
     names(match_list_lec$Playoffs)
   )
 )
 
+## Test main Function
 
+stans <- getStandings(lcs_id, save_details = FALSE)
+
+test_that(
+  "Wrapper did not do something wrong for NA LCS",
+  expect_equal(stans$match_list$`Regular Season`, match_list_lcs$`Regular Season`)
+)
 
 
 
