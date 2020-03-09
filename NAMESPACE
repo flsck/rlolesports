@@ -3,5 +3,6 @@
 export(check_apikey)
 export(getLeagues)
 export(getStandings)
+export(getTeams)
 export(getTournamentsForLeague)
 export(set_apikey)
