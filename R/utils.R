@@ -95,4 +95,10 @@ query_api <- function(url, key, ...) {
 #stck <- stack(list(hl = hl, id = c("tsm", "cloud9")))
 #params <- as.list(setNames(res$values, res$ind))
 
+expand_list <- function(list_obj) {
+  stacked <- stack(list_obj)
+  as.list(setNames(stacked$values, stacked$id))
+}
+
+
 
