@@ -91,5 +91,8 @@ query_api <- function(url, key, ...) {
   return(return_obj)
 }
 
+# gratefully taken from https://github.com/ropensci/rnassqs/commit/e36b38d4f43080fbf3e53abe49502eeebade6402
+#stck <- stack(list(hl = hl, id = c("tsm", "cloud9")))
+#params <- as.list(setNames(res$values, res$ind))
 
 

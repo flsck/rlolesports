@@ -4,14 +4,21 @@
 \alias{getTeams}
 \title{Get information about a team and its roster}
 \usage{
-getTeams(id, save_details = FALSE, hl = "en-US")
+getTeams(team_slug, save_details = FALSE, hl = "en-US")
 }
 \arguments{
-\item{id}{string. The}
+\item{team_slug}{string. The team id or slug name.}
 
-\item{save_details}{logical.}
+\item{save_details}{logical. Should a detailed object with the appropriate response
+values of the query be returned or just the relevant tables of
+that response}
 
 \item{hl}{string. Locale or language code using ISO 639-1 and ISO 3166-1 alpha-2.}
+}
+\value{
+If save_detals is `TRUE`, an object of class `teams` with details of the query.
+        Otherwise, a list of two tables, one for the team data, one for the player data
+        of that team.
 }
 \description{
 Get information about a team and its roster
