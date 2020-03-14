@@ -2,6 +2,7 @@
 
 export(check_apikey)
 export(getLeagues)
+export(getSchedule)
 export(getStandings)
 export(getTeams)
 export(getTournamentsForLeague)

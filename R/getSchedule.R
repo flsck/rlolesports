@@ -1,15 +1,18 @@
 #' Get Information about current Schedules
 #'
 #' @param leagueId string. The league id to be queried.
+#' @param check_old_pages logical. SHould older pages be querried as well?
+#' @param pageToken Base 64 encoded string used to determine the next "page" of data to pull. Only used if
+#'                  `check_old_pages` is `TRUE``.`
 #' @param save_details logical. Shoudl details be saved?
 #' @param hl string. Locale or language code using ISO 639-1 and ISO 3166-1 alpha-2.
-#' @param pageToken Base 64 encoded string used to detemin the next "page" of data to pull,
 #'
 #' @return Returns something
 #' @export
 getSchedule <- function(
   leagueId,
-  pageToken,
+  check_old_pages = TRUE,
+  pageToken = NULL,
   save_details = FALSE,
   hl = "en-U"
 ) {
@@ -23,21 +26,34 @@ getSchedule <- function(
     hl = hl,
     leagueId = leagueId
   )
+  events_list <- list()
+  events_list[[1]] <- parse_schedule_events(query_result)
+
   # TODO Check in the query result if there are more tables to query...
 
-  events <- query_result$parsed$data$schedule$events
-  # TODO parse the events data into a coherent table
-  events_2 <- events[, 1:5]
-  events_2$match.id <- events$match$id
-  events_2$match.flags <- unlist(events$match$flags)
-  events_2$match.strategy.type <- events$match$strategy$type
-  events_2$match.strategy.count <- events$match$strategy$count
-  sched_df <- create_schedule_df(events$match$teams)
-  events_final_p1 <- cbind(events_2, sched_df)
-  # TODO to do the above, check if get Standings Code can be reused here
-  if(query_result$parsed$data$schedule$pages$older)
+  if(check_old_pages) {
+    if(is.null(pageToken)) {
+      older_page <- query_result$parsed$data$schedule$pages$older
+    } else {
+      older_page <- pageToken
+    }
+    while(!is.null(older_page)) {
+      cat("Getting page ", length(events_list) + 1, "\n")
+      query_result_older <- query_api(
+        url = url,
+        key = key,
+        hl = hl,
+        leagueId = leagueId,
+        pageToken = older_page
+      )
+      events_list[[length(events_list) + 1]] <- parse_schedule_events(query_result_older)
+      older_page <- query_result_older$parsed$data$schedule$pages$older
+    }
 
+  }
 
+  comp_events <- do.call(rbind, c(events_list, make.row.names = FALSE))
+  df <- comp_events[order(comp_events$startTime),]
 
   if(save_details){
     # return s3 object
@@ -68,3 +84,23 @@ create_schedule_df <- function(list_of_teams) {
   )
   return(result)
 }
+
+parse_schedule_events <- function(query_result) {
+  events <- query_result$parsed$data$schedule$events
+  events_2 <- events[, 1:4]
+  events_2$league.name <- events$league$name
+  events_2$league.slug <- events$league$slug
+  events_2$match.id <- events$match$id
+  events_2$match.flags <- unlist(events$match$flags)
+  events_2$match.strategy.type <- events$match$strategy$type
+  events_2$match.strategy.count <- events$match$strategy$count
+  sched_df <- create_schedule_df(events$match$teams)
+  events_final_df <- cbind(events_2, sched_df)
+  return(events_final_df)
+}
+
+
+
+
+
+
