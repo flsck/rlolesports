@@ -2,19 +2,20 @@
 #'
 #' @param leagueId string. The league id to be queried.
 #' @param check_old_pages logical. SHould older pages be querried as well?
-#' @param pageToken Base 64 encoded string used to determine the next "page" of data to pull. Only used if
-#'                  `check_old_pages` is `TRUE``.`
+#' @param pageToken Base 64 encoded string used to determine the next "page" of data to pull.
+#'                  Only used if `check_old_pages` is `TRUE`.
 #' @param save_details logical. Shoudl details be saved?
 #' @param hl string. Locale or language code using ISO 639-1 and ISO 3166-1 alpha-2.
 #'
-#' @return Returns something
+#' @return Returns an object of class `Schedule` if details were saved. Otherwise, a `data.frame`
+#'         of scheduled matches for the queried league.
 #' @export
 getSchedule <- function(
   leagueId,
   check_old_pages = TRUE,
   pageToken = NULL,
   save_details = FALSE,
-  hl = "en-U"
+  hl = "en-US"
 ) {
   if(!(hl %in% valid_locales())) stop("hl is not valid.")
   key <- get_apikey()
@@ -28,8 +29,6 @@ getSchedule <- function(
   )
   events_list <- list()
   events_list[[1]] <- parse_schedule_events(query_result)
-
-  # TODO Check in the query result if there are more tables to query...
 
   if(check_old_pages) {
     if(is.null(pageToken)) {
@@ -56,9 +55,17 @@ getSchedule <- function(
   df <- comp_events[order(comp_events$startTime),]
 
   if(save_details){
-    # return s3 object
+    structure(
+      list(
+        events = df,
+        hl = hl,
+        leagueId = leagueId,
+        response = query_result$response
+      ),
+      class = "Schedule"
+    )
   } else {
-    # return an easy view of the tables
+    df
   }
 }
 

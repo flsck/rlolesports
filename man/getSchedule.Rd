@@ -9,7 +9,7 @@ getSchedule(
   check_old_pages = TRUE,
   pageToken = NULL,
   save_details = FALSE,
-  hl = "en-U"
+  hl = "en-US"
 )
 }
 \arguments{
@@ -17,15 +17,16 @@ getSchedule(
 
 \item{check_old_pages}{logical. SHould older pages be querried as well?}
 
-\item{pageToken}{Base 64 encoded string used to determine the next "page" of data to pull. Only used if
-`check_old_pages` is `TRUE``.`}
+\item{pageToken}{Base 64 encoded string used to determine the next "page" of data to pull.
+Only used if `check_old_pages` is `TRUE`.}
 
 \item{save_details}{logical. Shoudl details be saved?}
 
 \item{hl}{string. Locale or language code using ISO 639-1 and ISO 3166-1 alpha-2.}
 }
 \value{
-Returns something
+Returns an object of class `Schedule` if details were saved. Otherwise, a `data.frame`
+        of scheduled matches for the queried league.
 }
 \description{
 Get Information about current Schedules
