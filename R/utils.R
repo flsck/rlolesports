@@ -96,8 +96,8 @@ query_api <- function(url, key, ...) {
 #params <- as.list(setNames(res$values, res$ind))
 
 expand_list <- function(list_obj) {
-  stacked <- stack(list_obj)
-  as.list(setNames(stacked$values, stacked$id))
+  stacked <- utils::stack(list_obj)
+  as.list(stats::setNames(stacked$values, stacked$id))
 }
 
 
