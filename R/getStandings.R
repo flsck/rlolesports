@@ -70,40 +70,48 @@ process_matches <- function(parsed) {
 
     match_df_combined <- cbind(((stages[[4]][[i]])[[2]][[j]])[1:4], match_df)
     names(match_df_combined)[1] <- "match_id"
+    # change the type of the flags
     match_df_combined$flags <- as.character(match_df_combined$flags)
     match_df_combined$flags <- ifelse(match_df_combined$flags == "character(0)",
                                       NA,
                                       match_df_combined$flags)
 
+
     match_df_combined$round_name <- (stages[[4]][[i]])[[1]][[j]]
+
+    # collect in list
     indx <- length(round_data) + 1
     round_data[[indx]] <- match_df_combined
     names(round_data)[indx] <- stages$name[i]
     }
   }
-  # TODO
-  # check if names of round data are similar?
 
-  return(round_data)
+  # Check if there are multiple matches for the same stage and collect them if so
+  # WARNING: This could break if they do not have the same structure
+  uniques <- unique(names(round_data))
+  final_list <- list()
+  for(i in uniques) {
+    if(sum(names(round_data) == i) > 1) {
+      indx <- which(names(round_data) == i)
+      combs <- as.data.frame(
+        do.call(
+          rbind,
+          lapply(round_data[indx], function(x) x)
+        )
+      )
+      row.names(combs) <- NULL
+
+      final_list[[length(final_list) + 1]] <- combs
+      names(final_list)[length(final_list)] <- i
+    } else {
+      final_list[[length(final_list) + 1]] <- round_data[[i]]
+      names(final_list)[length(final_list)] <- i
+    }
+  }
+
+
+  return(final_list)
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
