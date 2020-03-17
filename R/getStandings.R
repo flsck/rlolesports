@@ -54,7 +54,6 @@ getStandings <- function(tournamentId,
 }
 
 
-
 #' Processes matches
 #'
 #' processes the parsed standings data
@@ -64,32 +63,49 @@ process_matches <- function(parsed) {
 
   round_data <- list()
   for(i in 1:nrow(stages)) {
-    list_of_matches <- ((stages[[4]][[i]])[[2]][[1]])[[5]]
+    for(j in 1:nrow(stages[[4]][[i]])) {
+    list_of_matches <- ((stages[[4]][[i]])[[2]][[j]])[[5]]
 
     match_df <- create_match_df(list_of_matches)
 
-    match_df_combined <- cbind(((stages[[4]][[i]])[[2]][[1]])[1:4], match_df)
+    match_df_combined <- cbind(((stages[[4]][[i]])[[2]][[j]])[1:4], match_df)
     names(match_df_combined)[1] <- "match_id"
     match_df_combined$flags <- as.character(match_df_combined$flags)
     match_df_combined$flags <- ifelse(match_df_combined$flags == "character(0)",
                                       NA,
                                       match_df_combined$flags)
 
-    match_df_combined$round_name <- (stages[[4]][[i]])[[1]]
-    round_data[[i]] <- match_df_combined
+    match_df_combined$round_name <- (stages[[4]][[i]])[[1]][[j]]
+    indx <- length(round_data) + 1
+    round_data[[indx]] <- match_df_combined
+    names(round_data)[indx] <- stages$name[i]
+    }
   }
-  names(round_data) <-stages$name
-  # TODO: Figure out a way to get the result column of every possible round (playoff, nonplayoff)
-  #       to be the same shape ..
-  # all_matches <- as.data.frame(
-  #   do.call(
-  #     rbind, lapply(match_data, function(x) x)
-  #   )
-  # )
+  # TODO
+  # check if names of round data are similar?
 
   return(round_data)
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #' create match dataframe object
 #'
