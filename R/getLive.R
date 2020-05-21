@@ -4,6 +4,7 @@
 #' Get information about live events currently going on..
 #'
 #' @param hl string. Locale or language code using ISO 639-1 and ISO 3166-1 alpha-2.
+#' @param save_details logical. Should just a table be returned, or also details about the requests.
 #'
 #' @return Returns an object of class `Schedule` if details were saved. Otherwise, a `data.frame`
 #'         of scheduled matches for the queried league.
