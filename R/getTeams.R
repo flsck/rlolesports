@@ -33,7 +33,7 @@ getTeams <- function(
   team_df <- as.data.frame(teams[, 1:8])
   colnames(team_df)[1] <- "team_id"
   player_df <- as.data.frame(teams$players[[1]])
-  player_df$team <- team_df$name
+  player_df$team <- team_df$name[1]
 
   tables <- list(
     team = team_df,

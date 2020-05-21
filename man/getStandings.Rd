@@ -17,6 +17,6 @@ getStandings(tournamentId, save_details = FALSE, hl = "en-US")
 Returns something
 }
 \description{
-The function takes a tournamend ID as argument and returns either a data.frame of the current standings
+The function takes a tournament ID as argument and returns either a data.frame of the current standings
 for the selected tournament, or a list including the data.frame as an element, plus the raw API response.
 }

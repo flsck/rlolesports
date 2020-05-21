@@ -98,7 +98,7 @@ parse_schedule_events <- function(query_result) {
   events_2$league.name <- events$league$name
   events_2$league.slug <- events$league$slug
   events_2$match.id <- events$match$id
-  events_2$match.flags <- unlist(events$match$flags)
+  events_2$match.flags <- as.character(events$match$flags)
   events_2$match.strategy.type <- events$match$strategy$type
   events_2$match.strategy.count <- events$match$strategy$count
   sched_df <- create_schedule_df(events$match$teams)

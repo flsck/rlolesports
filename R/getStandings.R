@@ -2,7 +2,7 @@
 
 #' Query the standings of a specified tournament
 #'
-#' The function takes a tournamend ID as argument and returns either a data.frame of the current standings
+#' The function takes a tournament ID as argument and returns either a data.frame of the current standings
 #' for the selected tournament, or a list including the data.frame as an element, plus the raw API response.
 #'
 #' @param tournamentId string. Can be taken from the getLeagues() function.
