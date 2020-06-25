@@ -6,8 +6,8 @@
 #' @param save_details logical. Should just a table be returned, or also details about the requests.
 #' @param hl string. Locale or language code using ISO 639-1 and ISO 3166-1 alpha-2.
 #'
-#' @return Returns an object of class `Schedule` if details were saved. Otherwise, a `data.frame`
-#'         of scheduled matches for the queried league.
+#' @return Returns an object of class `live` if details were saved. Otherwise, a `data.frame`
+#'         of current live events for the all E-Sports leagues included in the E-Sports API.
 #' @export
 getLive <- function(
   save_details = FALSE,
