@@ -16,4 +16,8 @@ URL: https://github.com/FlorianSck/rlolesports
 BugReports: https://github.com/FlorianSck/rlolesports/issues
 Imports: 
     jsonlite,
-    httr
+    httr,
+    magrittr,
+    stringr,
+    tidyr,
+    purrr
