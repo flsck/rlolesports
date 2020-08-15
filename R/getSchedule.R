@@ -78,12 +78,25 @@ create_schedule_df <- function(list_of_teams) {
         lapply(
           list_of_teams,
           function(x) {
-            colnames(x)[1:3] <- paste0(colnames(x)[1:3], "_team")
-            data <- as.data.frame(t(unlist(x)))
-            colnames(data)[c(7, 9, 11, 13)] <- gsub("1", "_team1", colnames(data)[c(7, 9, 11, 13)])
-            colnames(data)[c(8, 10, 12, 14)] <- gsub("2", "_team2", colnames(data)[c(8, 10, 12, 14)])
+            if(sum((x$name == "TBD")) < 2) {
+              colnames(x)[1:3] <- paste0(colnames(x)[1:3], "_team")
+              data <- as.data.frame(t(unlist(x)))
+              colnames(data)[c(7, 9, 11, 13)] <- gsub("1", "_team1", colnames(data)[c(7, 9, 11, 13)])
+              colnames(data)[c(8, 10, 12, 14)] <- gsub("2", "_team2", colnames(data)[c(8, 10, 12, 14)])
 
-            data
+              data
+            } else {
+              colnames(x)[1:3] <- paste0(colnames(x)[1:3], "_team")
+              x <- cbind(x[, 1:3], data.frame(result.outcome = c(NA, NA),
+                                         result.gameWins = c(NA, NA),
+                                         record.wins = c(NA, NA),
+                                         record.losses = c(NA, NA)))
+              data <- as.data.frame(t(unlist(x)))
+              colnames(data)[c(7, 9, 11, 13)] <- gsub("1", "_team1", colnames(data)[c(7, 9, 11, 13)])
+              colnames(data)[c(8, 10, 12, 14)] <- gsub("2", "_team2", colnames(data)[c(8, 10, 12, 14)])
+
+              data
+            }
           }
         )
       )
