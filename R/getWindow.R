@@ -14,6 +14,8 @@ getWindow <- function(gameId,
     hl = hl
   )
 
-  return(query_result)
+  query_result$parsed$gameMetadata
+
+  return()
 
 }
