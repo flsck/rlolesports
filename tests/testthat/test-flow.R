@@ -23,3 +23,4 @@ g2_mad_id <- lec_schedule$match.id[1]
 match_example <- getEventDetails(g2_mad_id)
 
 g2_mad_game <- match_example$games$game_id[1]
+
