@@ -18,26 +18,31 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of rlolesports is to ...
+The goal of rlolesports is to enable easy queries of the unofficial 
+Riot Games Esports API for League of Legends. 
+It is very much a package in development, not yet tested extensively. 
+
+The package offers very much opinionated data processing of the original
+JSON returns of the API. Thus, every user-facing function has a variable 
+`save_details`, which can be set to `TRUE` to return the original and unparsed
+query result. Without the flag, functions are built to return lists or data.frames
+for easy processing in the `dplyr` universe. 
 
 ## Installation
 
-You can install the development version from [GitHub](https://github.com/) with:
+You can install the current version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
 devtools::install_github("FlorianSck/rlolesports")
 ```
+
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+Example is tbd, we'll take a look at the getWindow function later.
 
 ```{r example}
 library(rlolesports)
 ## basic example code
 ```
-
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
-
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date.
 
