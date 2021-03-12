@@ -28,7 +28,10 @@ getEventDetails <- function(matchId,
   if(save_details == TRUE) {
     return(query_result)
   }
-
+  if(is.null(query_result$parsed$data$event)) {
+    message("Events seem to be empty.")
+    return(query_result)
+  }
 
   event <- query_result$parsed$data$event
   # start stuff
