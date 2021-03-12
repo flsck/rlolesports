@@ -24,6 +24,11 @@ getTournamentsForLeague <- function(leagueId,
     leagueId = leagueId,
     hl = hl
   )
+  # Status code catcher
+  if(query_result$status_code != 200) {
+    message(paste0("Something went wrong, status code: "), query_result$status_code)
+    return(query_result)
+  }
 
   if(is.null(query_result$parsed$data$leagues$tournaments))
   {

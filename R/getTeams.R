@@ -27,6 +27,11 @@ getTeams <- function(
     hl = hl,
     id = team_slug
   )
+  # Status code catcher
+  if(query_result$status_code != 200) {
+    message(paste0("Something went wrong, status code: "), query_result$status_code)
+    return(query_result)
+  }
 
   teams <- query_result$parsed$data$teams
 

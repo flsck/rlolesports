@@ -25,6 +25,11 @@ getStandings <- function(tournamentId,
     tournamentId = tournamentId,
     hl = hl
   )
+  # Status code catcher
+  if(query_result$status_code != 200) {
+    message(paste0("Something went wrong, status code: "), query_result$status_code)
+    return(query_result)
+  }
 
   match_list <-  process_matches(query_result$parsed)
   standings <- process_standings(query_result$parsed)

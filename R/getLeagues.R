@@ -39,6 +39,11 @@ getLeagues <- function(save_details = FALSE,
     key = key,
     hl = hl
   )
+  # Status code catcher
+  if(query_result$status_code != 200) {
+    message(paste0("Something went wrong, status code: "), query_result$status_code)
+    return(query_result)
+  }
 
   table <-  as.data.frame(query_result$parsed[[1]][[1]])
 

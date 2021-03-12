@@ -1,7 +1,9 @@
 #' Get Information about current Schedules
 #'
+#' For a given `leagueId` string, the function returns schedule data.
+#'
 #' @param leagueId string. The league id to be queried.
-#' @param check_old_pages logical. SHould older pages be querried as well?
+#' @param check_old_pages logical. Should older pages be querried as well?
 #' @param pageToken Base 64 encoded string used to determine the next "page" of data to pull.
 #'                  Only used if `check_old_pages` is `TRUE`.
 #' @param save_details logical. Shoudl details be saved?
@@ -27,6 +29,11 @@ getSchedule <- function(
     hl = hl,
     leagueId = leagueId
   )
+  # Status code catcher
+  if(query_result$status_code != 200) {
+    message(paste0("Something went wrong, status code: "), query_result$status_code)
+    return(query_result)
+  }
   events_list <- list()
   events_list[[1]] <- parse_schedule_events(query_result)
 

@@ -1,4 +1,4 @@
-startingTime <- "2020-06-12 16:28:00" # dekete me
+
 # TODO add save_details flag im code
 
 #' getWindow
@@ -29,7 +29,16 @@ getWindow <- function(gameId,
       key = key,
       hl = hl,
       startingTime = processed_time
-  )
+    )
+  }
+  # Status code catcher
+  if(query_result$status_code != 200) {
+    message(paste0("Something went wrong, status code: "), query_result$status_code)
+    return(query_result)
+  }
+  # Catch if raw objects is returned
+  if(save_details == TRUE) {
+    return(query_result)
   }
 
   meta_data <- query_result$parsed$gameMetadata
@@ -47,6 +56,7 @@ getWindow <- function(gameId,
   row.names(red_team) <- NULL
   red_team <- dplyr::distinct(red_team, timestamp, .keep_all = TRUE)
 
+  # Aggregate Blue Data
   blue_team_long <- blue_team %>%
     tidyr::unnest_longer("participants", names_repair = "unique")
   blue_team_members <- cbind(
@@ -56,6 +66,7 @@ getWindow <- function(gameId,
   blue_team_joined <- dplyr::right_join(blue_team, blue_team_members, by = "timestamp")
   blue_team_joined$team <- "blue"
 
+  # Aggregate Red Data
   red_team_long <- red_team %>%
     tidyr::unnest_longer("participants", names_repair = "unique")
   red_team_members <-  cbind(
