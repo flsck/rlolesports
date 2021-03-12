@@ -11,7 +11,10 @@ getWindow(gameId, hl = "en-US", startingTime = NULL, save_details = FALSE)
 
 \item{hl}{string. Locale or language code using ISO 639-1 and ISO 3166-1 alpha-2.}
 
-\item{save_details}{logical. Shoudl details be saved?}
+\item{startingTime}{a string in the form `Y-m-d H:M:S`. Needs to be compatible with
+`lubridate::ymd_hms()`.}
+
+\item{save_details}{logical. Should details be saved?}
 }
 \value{
 A list of game metadata and a data.frame of game data, or raw query result.

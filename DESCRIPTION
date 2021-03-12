@@ -20,4 +20,6 @@ Imports:
     magrittr,
     stringr,
     tidyr,
-    purrr
+    purrr,
+    dplyr,
+    lubridate

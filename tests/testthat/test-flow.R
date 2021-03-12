@@ -1,5 +1,8 @@
 set_apikey()
 
+# This is supposed to be an explanatory workflow.
+# TODO: Remove this and move into a vignette.
+
 # leagues tests -------
 leagues <- getLeagues(save_details = TRUE)
 

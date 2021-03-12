@@ -5,8 +5,11 @@
 #' able to be predetermined.
 #'
 #' @param gameId string. The ID of the game for which data should be searched.
-#' @param save_details logical. Shoudl details be saved?
 #' @param hl string. Locale or language code using ISO 639-1 and ISO 3166-1 alpha-2.
+#' @param startingTime a string in the form `Y-m-d H:M:S`. Needs to be compatible with
+#' `lubridate::ymd_hms()`.
+#' @param save_details logical. Should details be saved?
+#'
 #'
 #' @return A list of game metadata and a data.frame of game data, or raw query result.
 #'
@@ -15,7 +18,8 @@ getWindow <- function(gameId,
                       hl = "en-US",
                       startingTime = NULL,
                       save_details = FALSE) {
-
+  # Test if this gets around obnoxious note
+  timestamp <- totalGold <- NULL # delete this in case of shenanigans
   if(!(hl %in% valid_locales())) stop("hl is not valid.")
   key <- get_apikey()
   url <- paste0("https://feed.lolesports.com/livestats/v1/window/", gameId)
