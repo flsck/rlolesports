@@ -1,4 +1,5 @@
 startingTime <- "2020-06-12 16:28:00" # dekete me
+# TODO add save_details flag im code
 
 #' getWindow
 #'
@@ -7,7 +8,7 @@ getWindow <- function(gameId,
                       hl = "en-US",
                       startingTime = NULL,
                       save_details = FALSE) {
-  hl = "en-US" # delete me
+
   if(!(hl %in% valid_locales())) stop("hl is not valid.")
   key <- get_apikey()
   url <- paste0("https://feed.lolesports.com/livestats/v1/window/", gameId)
