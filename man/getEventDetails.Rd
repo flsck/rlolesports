@@ -4,13 +4,18 @@
 \alias{getEventDetails}
 \title{getEventDetails}
 \usage{
-getEventDetails(matchId, hl = "en-US")
+getEventDetails(matchId, hl = "en-US", save_details = FALSE)
 }
 \arguments{
 \item{matchId}{the id of the match of interest.}
 
 \item{hl}{string. Locale or language code using ISO 639-1 and ISO 3166-1 alpha-2.}
+
+\item{save_details}{logical. Should just a table be returned, or also details about the requests.}
+}
+\value{
+data.frame of event details or raw query.
 }
 \description{
-getEventDetails
+Get details for a given match ID.
 }

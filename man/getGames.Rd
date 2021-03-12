@@ -2,15 +2,21 @@
 % Please edit documentation in R/getGames.R
 \name{getGames}
 \alias{getGames}
-\title{getGames}
+\title{Get games data for series games}
 \usage{
-getGames(gameId, hl = "en-US")
+getGames(gameId, hl = "en-US", save_details = FALSE)
 }
 \arguments{
-\item{gameId}{The id of the game of interest}
+\item{gameId}{string. The ID of the game for which data should be searched.}
 
 \item{hl}{string. Locale or language code using ISO 639-1 and ISO 3166-1 alpha-2.}
+
+\item{save_details}{logical. Shoudl details be saved?}
+}
+\value{
+A data.frame of games data or the raw query.
 }
 \description{
-getGames
+If a game is a best-of series, the function can return the specific game IDs
+of the series.
 }

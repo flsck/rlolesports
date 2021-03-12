@@ -1,9 +1,16 @@
-
-# TODO add save_details flag im code
-
-#' getWindow
+#' Get game data from a certain starting time
 #'
-#' @inheritParams getGames
+#' The function returns player data in a specified timeframe. It is possible
+#' to set a certain starting point for the timeframe, but final length is not
+#' able to be predetermined.
+#'
+#' @param gameId string. The ID of the game for which data should be searched.
+#' @param save_details logical. Shoudl details be saved?
+#' @param hl string. Locale or language code using ISO 639-1 and ISO 3166-1 alpha-2.
+#'
+#' @return A list of game metadata and a data.frame of game data, or raw query result.
+#'
+#' @export
 getWindow <- function(gameId,
                       hl = "en-US",
                       startingTime = NULL,

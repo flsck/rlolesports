@@ -16,5 +16,5 @@ Returns an object of class `live` if details were saved. Otherwise, a `data.fram
         of current live events for the all E-Sports leagues included in the E-Sports API.
 }
 \description{
-Get information about live events currently going on..
+Get information about live events currently going on.
 }

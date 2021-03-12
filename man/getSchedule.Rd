@@ -15,7 +15,7 @@ getSchedule(
 \arguments{
 \item{leagueId}{string. The league id to be queried.}
 
-\item{check_old_pages}{logical. SHould older pages be querried as well?}
+\item{check_old_pages}{logical. Should older pages be querried as well?}
 
 \item{pageToken}{Base 64 encoded string used to determine the next "page" of data to pull.
 Only used if `check_old_pages` is `TRUE`.}
@@ -29,5 +29,5 @@ Returns an object of class `Schedule` if details were saved. Otherwise, a `data.
         of scheduled matches for the queried league.
 }
 \description{
-Get Information about current Schedules
+For a given `leagueId` string, the function returns schedule data.
 }

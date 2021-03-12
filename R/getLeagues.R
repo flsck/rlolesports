@@ -1,6 +1,3 @@
-
-# getLeagues ---------
-
 #' Get information about a league, the standings and its various tournaments.
 #'
 #' The function is used to get detailed information about specific leagues.

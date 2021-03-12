@@ -1,5 +1,3 @@
-# getStandings ----------
-
 #' Query the standings of a specified tournament
 #'
 #' The function takes a tournament ID as argument and returns either a data.frame of the current standings

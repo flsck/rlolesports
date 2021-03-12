@@ -1,12 +1,14 @@
-
 #' getEventDetails
 #'
-#'
+#' Get details for a given match ID.
 #'
 #' @param matchId the id of the match of interest.
 #' @inheritParams getStandings
+#' @return data.frame of event details or raw query.
+#' @export
 getEventDetails <- function(matchId,
-                            hl = "en-US") {
+                            hl = "en-US",
+                            save_details = FALSE) {
   if(!(hl %in% valid_locales())) stop("hl is not valid.")
   key <- get_apikey()
   url <- paste0(league_url(), "getEventDetails")
@@ -22,6 +24,11 @@ getEventDetails <- function(matchId,
     message(paste0("Something went wrong, status code: "), query_result$status_code)
     return(query_result)
   }
+  # Catch if raw objects is returned
+  if(save_details == TRUE) {
+    return(query_result)
+  }
+
 
   event <- query_result$parsed$data$event
   # start stuff

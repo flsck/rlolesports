@@ -1,7 +1,7 @@
 
 #' Get live events
 #'
-#' Get information about live events currently going on..
+#' Get information about live events currently going on.
 #'
 #' @param save_details logical. Should just a table be returned, or also details about the requests.
 #' @param hl string. Locale or language code using ISO 639-1 and ISO 3166-1 alpha-2.

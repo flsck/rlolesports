@@ -2,15 +2,22 @@
 % Please edit documentation in R/getWindow.R
 \name{getWindow}
 \alias{getWindow}
-\title{getWindow}
+\title{Get game data from a certain starting time}
 \usage{
-getWindow(gameId, hl = "en-US")
+getWindow(gameId, hl = "en-US", startingTime = NULL, save_details = FALSE)
 }
 \arguments{
-\item{gameId}{The id of the game of interest}
+\item{gameId}{string. The ID of the game for which data should be searched.}
 
 \item{hl}{string. Locale or language code using ISO 639-1 and ISO 3166-1 alpha-2.}
+
+\item{save_details}{logical. Shoudl details be saved?}
+}
+\value{
+A list of game metadata and a data.frame of game data, or raw query result.
 }
 \description{
-getWindow
+The function returns player data in a specified timeframe. It is possible
+to set a certain starting point for the timeframe, but final length is not
+able to be predetermined.
 }
