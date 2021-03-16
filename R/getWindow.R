@@ -90,7 +90,9 @@ getWindow <- function(gameId,
   both_teams <- rbind(blue_team_joined, red_team_joined)
   both_teams <- dplyr::left_join(both_teams, team_data, by = c("participantId" = "participantId"))
 
-  return(list(window = both_teams,
-              metaData = meta_data))
+  return(list(window   = both_teams,
+              metaData = meta_data,
+              gameId   = query_result$parsed$esportsGameId,
+              matchId  = query_result$parsed$esportsMatchId))
 
 }

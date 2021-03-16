@@ -3,6 +3,7 @@
 export("%>%")
 export(check_apikey)
 export(getCompletedEvents)
+export(getDetails)
 export(getEventDetails)
 export(getGames)
 export(getLeagues)
