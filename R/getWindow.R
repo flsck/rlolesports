@@ -51,6 +51,7 @@ getWindow <- function(gameId,
   if(save_details == TRUE) {
     return(query_result)
   }
+  game_state <- query_result$parsed$frames$gameState
 
   meta_data <- query_result$parsed$gameMetadata
   team_data <- rbind(meta_data$blueTeamMetadata$participantMetadata,
@@ -59,11 +60,13 @@ getWindow <- function(gameId,
   # separate blue and red to ease some of the workings
   blue_team <- query_result$parsed$frames$blueTeam
   blue_team$timestamp <- query_result$parsed$frames$rfc460Timestamp
+  blue_team$gamestate <- query_result$parsed$frames$gameState
   row.names(blue_team) <- NULL
   blue_team <- dplyr::distinct(blue_team, timestamp, .keep_all = TRUE)
 
   red_team <- query_result$parsed$frames$redTeam
   red_team$timestamp <- query_result$parsed$frames$rfc460Timestamp
+  red_team$gamestate <- query_result$parsed$frames$gameState
   row.names(red_team) <- NULL
   red_team <- dplyr::distinct(red_team, timestamp, .keep_all = TRUE)
 
@@ -71,24 +74,27 @@ getWindow <- function(gameId,
   blue_team_long <- blue_team %>%
     tidyr::unnest_longer("participants", names_repair = "unique")
   blue_team_members <- cbind(
-    data.frame(timestamp = blue_team_long$timestamp),
+    data.frame(timestamp = blue_team_long$timestamp,
+               gamestate = blue_team$gamestate),
     blue_team_long %>% dplyr::pull("participants") %>% dplyr::rename(participantGold = totalGold)
   )
-  blue_team_joined <- dplyr::right_join(blue_team, blue_team_members, by = "timestamp")
+  blue_team_joined <- dplyr::right_join(blue_team, blue_team_members, by = c("timestamp", "gamestate"))
   blue_team_joined$team <- "blue"
 
   # Aggregate Red Data
   red_team_long <- red_team %>%
     tidyr::unnest_longer("participants", names_repair = "unique")
   red_team_members <-  cbind(
-    data.frame(timestamp = red_team_long$timestamp),
+    data.frame(timestamp = red_team_long$timestamp,
+               gamestate = red_team$gamestate),
     red_team_long %>% dplyr::pull("participants") %>% dplyr::rename(participantGold = totalGold)
   )
-  red_team_joined <- dplyr::right_join(red_team, red_team_members, by = "timestamp")
+  red_team_joined <- dplyr::right_join(red_team, red_team_members, by = c("timestamp", "gamestate"))
   red_team_joined$team <- "red"
 
   both_teams <- rbind(blue_team_joined, red_team_joined)
   both_teams <- dplyr::left_join(both_teams, team_data, by = c("participantId" = "participantId"))
+  both_teams$participants <- NULL
 
   return(list(window   = both_teams,
               metaData = meta_data,
