@@ -1,10 +1,17 @@
 #' getEventDetails
 #'
-#' Get details for a given match ID.
+#' Get details for a given match ID. This is useful to get the
+#' `gameId`s of single games for a given match. So one match can
+#' have different `gameId`s, which can be found by `value$games$game_id`
+#' where `value` is the response value of this function with the `save_details`
+#' flag set to false.
+#' These `gameId`s can be used for further analysis in the functions `getWindow()`
+#' and `getDetails()`.
 #'
 #' @param matchId the id of the match of interest.
 #' @inheritParams getStandings
 #' @return data.frame of event details or raw query.
+#'
 #' @export
 getEventDetails <- function(matchId,
                             hl = "en-US",
