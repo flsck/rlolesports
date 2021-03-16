@@ -96,13 +96,8 @@ process_matches <- function(parsed) {
   for(i in uniques) {
     if(sum(names(round_data) == i) > 1) {
       indx <- which(names(round_data) == i)
-      combs <- as.data.frame(
-        do.call(
-          rbind,
-          lapply(round_data[indx], function(x) x)
-        )
-      )
-      row.names(combs) <- NULL
+      combs <- dplyr::bind_rows(round_data[indx])
+
 
       final_list[[length(final_list) + 1]] <- combs
       names(final_list)[length(final_list)] <- i
