@@ -22,8 +22,8 @@ You can install the current version from [GitHub](https://github.com/)
 with:
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("FlorianSck/rlolesports")
+# install.packages("remotes")
+remotes::install_github("flsck/rlolesports")
 ```
 
 ## Example
