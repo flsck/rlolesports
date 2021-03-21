@@ -30,6 +30,7 @@ g2_mad_game <- match_example$games$game_id[1]
 g2_mad_window <- getWindow(g2_mad_game)
 g2_mad_details <- getDetails(g2_mad_game)
 
+# start
 
 start_window <- getWindow(g2_mad_game)$window %>%
   group_by(timestamp, team) %>%
@@ -68,6 +69,21 @@ while(game_still_going) {
   complete_data <- bind_rows(complete_data, curr_win)
 }
 tictoc::toc()
+
+#emd
+
+data <- complete_data %>%
+  group_by(team, timestamp) %>%
+  mutate(time = lubridate::ymd_hms(timestamp)) %>%
+  arrange(time) %>%
+  distinct(time, team, .keep_all = TRUE)
+
+library(ggplot2)
+
+ggplot(data, aes(x = time, y = totalGold, col = team)) +
+  geom_path() +
+  theme_minimal()
+
 
 
 g2m <- getDetails(g2_mad_game, startingTime = max_time_one)
