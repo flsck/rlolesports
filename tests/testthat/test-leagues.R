@@ -1,4 +1,4 @@
-set_apikey()
+# set_apikey()
 
 # leagues tests -------
 leagues <- getLeagues(save_details = TRUE)

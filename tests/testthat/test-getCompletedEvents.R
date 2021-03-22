@@ -1,4 +1,4 @@
-set_apikey()
+# set_apikey()
 key <- get_apikey()
 url <- paste0(league_url(), "getCompletedEvents")
 lec_id <- "103462459318635408"

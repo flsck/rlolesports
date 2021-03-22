@@ -34,11 +34,12 @@ check_apikey  <- function() {
 
 #' get the api key for processing by other functions
 get_apikey <- function() {
-  key <- Sys.getenv("LOLESPORTS_KEY")
-  if(identical(key, "")) {
-    stop("Env var is not set. Please set the env var LOLESPORTS_KEY via 'set_key()' function",
-         call. = FALSE)
-  }
+  # key <- Sys.getenv("LOLESPORTS_KEY")
+  # if(identical(key, "")) {
+  #   stop("Env var is not set. Please set the env var LOLESPORTS_KEY via 'set_key()' function",
+  #        call. = FALSE)
+  # }
+  key <- "0TvQnueqKa5mxJntVWt0w4LpLfEkrV1Ta8rQBb9Z"
   return(key)
 }
 

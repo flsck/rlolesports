@@ -2,7 +2,7 @@
 
 # It's not testing rn due to long time for a query.
 
-set_apikey()
+#set_apikey()
 #
 # This is supposed to be an explanatory workflow.
 # TODO: Remove this and move into a vignette.
