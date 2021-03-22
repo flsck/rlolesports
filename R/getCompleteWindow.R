@@ -20,7 +20,7 @@ getCompleteWindow <- function(gameId,
   metaData <- window$metaData
   start_window <- window$window
 
-  curr_time <- tail(start_window$timestamp, 1) %>%
+  curr_time <- utils::tail(start_window$timestamp, 1) %>%
     lubridate::ymd_hms() %>%
     lubridate::round_date(unit="10s")
   last_time <- curr_time
@@ -52,7 +52,7 @@ getCompleteWindow <- function(gameId,
     complete_data <- dplyr::bind_rows(complete_data, curr_win)
   }
 
-  difft <-round(difftime(Sys.time(), last, units = "mins"), 4)
+  difft <-round(difftime(Sys.time(), start_time, units = "mins"), 4)
   print(paste0("Game done, duration: ", difft, "mins"))
   return(
     list(data = complete_data,
