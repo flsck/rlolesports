@@ -47,7 +47,7 @@ library(rlolesports)
 
 leagues <- getLeagues()
 
-head(leagues[,1:4], 10)
+# head(leagues[,1:4], 10)
 ```
 
 We'll try to get some data for a match played in the LEC, so we'll filter
@@ -61,7 +61,7 @@ lec_id <- leagues %>%
   dplyr::select(id) %>% 
   purrr::pluck(1)
 
-print(paste0("The ID of the LEC is: ", lec_id))
+# print(paste0("The ID of the LEC is: ", lec_id))
 ```
 
 To get a bit ahead of myself: The function `getTournamentsForLeague(...)` returns all available 
@@ -73,7 +73,7 @@ split.
 ```{r}
 # Get the ID and dates for tournaments in the LEC
 tourney <- getTournamentsForLeague(leagueId = lec_id)
-head(tourney)
+# head(tourney)
 
 # Extract the ID of the 2021 spring split of the LEC
 lec_spring_id <- tourney %>%
@@ -99,7 +99,7 @@ spring_starting_date <- dplyr::filter(tourney, id == lec_spring_id) %>%
 lec_spring_schedule <- 
   dplyr::filter(lec_schedule, as.Date(startTime) >= spring_starting_date)
 
-head(lec_spring_schedule)
+# head(lec_spring_schedule)
 ```
 
 Next, we juggle some IDs - match and game IDs, to be precise. To get details of a game, such as 
@@ -128,16 +128,16 @@ by calling `getCompleteWindow()`.
 
 ```{r, cache=TRUE}
 g2_vs_mad <- getCompleteWindow(opening_game_id)
-print(g2_vs_mad$data[2500:2510,])
+# print(g2_vs_mad$data[2500:2510,])
 ```
 
 That's it. Now we have data for the game and could analyze, for example, the time series of totalGold. 
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 # Since the data.frame returns one row per team member per team, we need to extract just 
 # one row for a given timestamp and team for the aggregated statistics, like totalGold and 
 # totalKills. 
-library(dplyr)
+library(dplyr, verbose=FALSE)
 
 plot_df <- g2_vs_mad$data %>% 
   group_by(timestamp, team) %>% 
@@ -158,7 +158,7 @@ plot_df <- plot_df %>%
   distinct(timestamp, .keep_all = TRUE) %>% 
   tidyr::complete(blue_lead, timestamp, fill = list(blue_diff = 0))
 
-library(ggplot2)
+library(ggplot2, verbose=FALSE)
 
 plot_df %>% 
   ggplot(aes(x = timestamp, y = blue_diff, color = blue_lead)) +
@@ -175,9 +175,9 @@ plot_df %>%
   xlab("") + ylab("") + 
   ggtitle("Gold Difference between G2 (blue) and MAD (red)") +
   theme(legend.position = "none",
-        panel.background = element_rect(fill = "grey"),
-        plot.background = element_rect(fill = "grey"),
-        panel.grid = element_line(colour = "grey"),
+        panel.background = element_rect(fill = "darkgrey"),
+        plot.background = element_rect(fill = "darkgrey"),
+        panel.grid = element_line(colour = "darkgrey"),
         title = element_text())
 ```
 
