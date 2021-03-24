@@ -4,13 +4,13 @@
 #'
 #' This function takes a tournament Id and returns completed events
 #'
-#' @param tournamentId string. Can be taken from the getLeagues() function.
+#' @param tournamentId string. Can be taken from the get_leagues() function.
 #' @param save_details logical. Should just a table be returned, or also details about the requests.
 #' @param hl string. Locale or language code using ISO 639-1 and ISO 3166-1 alpha-2.
 #'
 #' @return Returns something
 #' @export
-getCompletedEvents <- function(tournamentId,
+get_completed_events <- function(tournamentId,
                                save_details = FALSE,
                                hl = "en-US") {
   if(!(hl %in% valid_locales())) stop("hl is not valid.")

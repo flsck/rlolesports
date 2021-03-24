@@ -28,13 +28,13 @@ remotes::install_github("flsck/rlolesports")
 
 ## Example
 
-First, we use `getLeagues()` without any parameter to create a list of
+First, we use `get_leagues()` without any parameter to create a list of
 leagues for which data can be queried.
 
 ``` r
 library(rlolesports)
 
-leagues <- getLeagues()
+leagues <- get_leagues()
 
 # head(leagues[,1:4], 10)
 ```
@@ -54,7 +54,7 @@ lec_id <- leagues %>%
 ```
 
 To get a bit ahead of myself: The function
-`getTournamentsForLeague(...)` returns all available splits or general
+`get_tournaments_for_league(...)` returns all available splits or general
 tournaments for a given league. The ids gathered by this function
 however are NOT used when finding a leagues’s schedule, that the
 leagueId’s job, which we already have! The query below will help us
@@ -63,7 +63,7 @@ split.
 
 ``` r
 # Get the ID and dates for tournaments in the LEC
-tourney <- getTournamentsForLeague(leagueId = lec_id)
+tourney <- get_tournaments_for_league(leagueId = lec_id)
 # head(tourney)
 
 # Extract the ID of the 2021 spring split of the LEC
@@ -113,16 +113,16 @@ opening_match <- lec_spring_schedule$match.id[1]
 
 # but the matchId is not the gameId we need for detailed queries of match details, 
 # which is why we need to grab details of the match, where the respective gameId is saved.
-opening_details <- getEventDetails(opening_match)
+opening_details <- get_event_details(opening_match)
 
 opening_game_id <- opening_details$games$game_id[1]
 ```
 
 With the `gameId` as a variable, we can get detailed information about
-the match by calling `getCompleteWindow()`.
+the match by calling `get_complete_window()`.
 
 ``` r
-g2_vs_mad <- getCompleteWindow(opening_game_id)
+g2_vs_mad <- get_complete_window(opening_game_id)
 #> [1] "Game done, duration: 1.334mins"
 # print(g2_vs_mad$data[2500:2510,])
 ```

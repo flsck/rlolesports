@@ -11,7 +11,7 @@
 #'         of that team.
 #'
 #' @export
-getTeams <- function(
+get_teams <- function(
   team_slug,
   save_details = FALSE,
   hl = "en-US"

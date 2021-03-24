@@ -14,7 +14,7 @@
 #' @return A list of game metadata and a data.frame of game data, or raw query result.
 #'
 #' @export
-getWindow <- function(gameId,
+get_window <- function(gameId,
                       hl = "en-US",
                       startingTime = NULL,
                       save_details = FALSE) {

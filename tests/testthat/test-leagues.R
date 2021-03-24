@@ -1,7 +1,7 @@
 # set_apikey()
 
 # leagues tests -------
-leagues <- getLeagues(save_details = TRUE)
+leagues <- get_leagues(save_details = TRUE)
 
 test_that(
   "LCS and LEC can be found",
@@ -10,7 +10,7 @@ test_that(
 
 # Tournament tests ----
 lec_id <- "98767991302996019"
-tourney <- getTournamentsForLeague(leagueId = lec_id)
+tourney <- get_tournaments_for_league(leagueId = lec_id)
 
 test_that(
   "Tournaments have the relevant names",

@@ -3,13 +3,13 @@
 #' The function takes a tournament ID as argument and returns either a data.frame of the current standings
 #' for the selected tournament, or a list including the data.frame as an element, plus the raw API response.
 #'
-#' @param tournamentId string. Can be taken from the getLeagues() function.
+#' @param tournamentId string. Can be taken from the get_leagues() function.
 #' @param save_details logical. Should just a table be returned, or also details about the requests.
 #' @param hl string. Locale or language code using ISO 639-1 and ISO 3166-1 alpha-2.
 #'
 #' @return Returns something
 #' @export
-getStandings <- function(tournamentId,
+get_standings <- function(tournamentId,
                          save_details = FALSE,
                          hl = "en-US") {
 

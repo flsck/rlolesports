@@ -1,5 +1,5 @@
 
-# getTournamentsForLeague ------
+# get_tournaments_for_league ------
 
 #' Get Tournaments for a given league.
 #'
@@ -11,7 +11,7 @@
 #'
 #' @return list.
 #' @export
-getTournamentsForLeague <- function(leagueId,
+get_tournaments_for_league <- function(leagueId,
                                     save_details = FALSE,
                                     hl = "en-US") {
   if(!(hl %in% valid_locales())) stop("hl is not valid.")

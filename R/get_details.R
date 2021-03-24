@@ -15,7 +15,7 @@
 #' In the case of a data.frame, participantID 1 to 5 is blue team, 6 to 10 is red team.
 #'
 #' @export
-getDetails <- function(gameId,
+get_details <- function(gameId,
                        hl = "en-US",
                        startingTime = NULL,
                        save_details = FALSE) {

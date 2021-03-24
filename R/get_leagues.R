@@ -12,7 +12,7 @@
 #'         the used language code and the response to the original GET request
 #'         contained in the function.
 #' @export
-getLeagues <- function(save_details = FALSE,
+get_leagues <- function(save_details = FALSE,
                        hl = "en-US") {
   if(!(hl %in% valid_locales())) stop("hl is not valid.")
 

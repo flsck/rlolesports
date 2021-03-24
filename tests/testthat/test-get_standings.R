@@ -60,7 +60,7 @@ test_that(
 
 ## Test main Function
 
-stans <- getStandings(lcs_id, save_details = FALSE)
+stans <- get_standings(lcs_id, save_details = FALSE)
 
 test_that(
   "Wrapper did not do something wrong for NA LCS",

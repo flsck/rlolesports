@@ -10,7 +10,7 @@
 #' @return A data.frame of games data or the raw query.
 #'
 #' @export
-getGames <- function(gameId,
+get_games <- function(gameId,
                      hl = "en-US",
                      save_details = FALSE) {
   if(!(hl %in% valid_locales())) stop("hl is not valid.")

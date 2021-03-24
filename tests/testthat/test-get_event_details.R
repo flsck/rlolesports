@@ -5,5 +5,5 @@ matchId = "103462460596524866"
 url <- paste0(league_url(), "getEventDetails")
 
 
-a <- getEventDetails(matchId)
+a <- get_event_details(matchId)
 

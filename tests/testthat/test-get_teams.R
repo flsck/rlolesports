@@ -1,6 +1,6 @@
 # Setup -------
 key <- get_apikey()
-url <- paste0(league_url(), "getTeams")
+url <- paste0(league_url(), "get_teams")
 hl <-  "en-US"
 
 # single example -----
@@ -18,7 +18,7 @@ test_that(
   expect_equal(query_result$status_code, 200)
 )
 
-compl_return <- getTeams(team_slug = team_slug,
+compl_return <- get_teams(team_slug = team_slug,
                          save_details = TRUE)
 
 test_that(

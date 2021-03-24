@@ -9,7 +9,7 @@
 #' @return Returns an object of class `live` if details were saved. Otherwise, a `data.frame`
 #'         of current live events for the all E-Sports leagues included in the E-Sports API.
 #' @export
-getLive <- function(
+get_live <- function(
   save_details = FALSE,
   hl = "en-US"
 ) {
@@ -99,7 +99,7 @@ parse_live_events <- function(query_result) {
   events_m$match.strategy.count <- events$match$strategy$count
 
   # TODO
-  # adapt create_schedule_df to the values of getLive
+  # adapt create_schedule_df to the values of get_live
   # difference is that the schedule events do not have team slugs
 
 

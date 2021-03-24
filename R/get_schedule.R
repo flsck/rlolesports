@@ -12,7 +12,7 @@
 #' @return Returns an object of class `Schedule` if details were saved. Otherwise, a `data.frame`
 #'         of scheduled matches for the queried league.
 #' @export
-getSchedule <- function(
+get_schedule <- function(
   leagueId,
   check_old_pages = TRUE,
   pageToken = NULL,
