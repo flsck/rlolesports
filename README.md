@@ -128,7 +128,10 @@ g2_vs_mad <- getCompleteWindow(opening_game_id)
 ```
 
 That’s it. Now we have data for the game and could analyze, for example,
-the time series of totalGold.
+the time series of totalGold. Below is just a possible graphical
+illustration of the total gold difference over time. Note that we have
+not adressed the time axis, which is not currently gametime, but just
+the UTC time.
 
 ``` r
 # Since the data.frame returns one row per team member per team, we need to extract just 
