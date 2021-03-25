@@ -1,6 +1,6 @@
 # Setup -------
 key <- get_apikey()
-url <- paste0(league_url(), "get_teams")
+url <- paste0(league_url(), "getTeams")
 hl <-  "en-US"
 
 # single example -----
