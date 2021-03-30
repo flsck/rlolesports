@@ -54,10 +54,10 @@ lec_id <- leagues %>%
 ```
 
 To get a bit ahead of myself: The function
-`get_tournaments_for_league(...)` returns all available splits or general
-tournaments for a given league. The ids gathered by this function
-however are NOT used when finding a leagues’s schedule, that the
-leagueId’s job, which we already have! The query below will help us
+`get_tournaments_for_league(...)` returns all available splits or
+general tournaments for a given league. The ids gathered by this
+function however are NOT used when finding a leagues’s schedule, that
+the leagueId’s job, which we already have! The query below will help us
 later - because it allows us to find the starting date of a specific
 split.
 
@@ -79,7 +79,7 @@ utilize the `tourney` data.frame from above to find the starting date of
 the LEC 2021 spring split.
 
 ``` r
-lec_schedule <- getSchedule(lec_id)
+lec_schedule <- get_schedule(lec_id)
 #> Getting page  2 
 #> Getting page  3
 
@@ -123,7 +123,7 @@ the match by calling `get_complete_window()`.
 
 ``` r
 g2_vs_mad <- get_complete_window(opening_game_id)
-#> [1] "Game done, duration: 1.334mins"
+#> [1] "Game done, duration: 1.3316mins"
 # print(g2_vs_mad$data[2500:2510,])
 ```
 
